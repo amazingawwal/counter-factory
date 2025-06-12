@@ -1,4 +1,4 @@
-// -------------------------TASK 1----------------------------------------------------------------
+// -------------------------STEP 1----------------------------------------------------------------
 // This is a counter factory (Constructor ) function that creates counter objects
 function CreateCounter (value){
     this.value = value
@@ -23,7 +23,7 @@ CreateCounter.prototype.getValue = function (){
 
 
 
-// ---------------------------TASK 2-------------------------------------------------------------------------------
+// ---------------------------STEP 2-------------------------------------------------------------------------------
 
 CreateCounter.prototype.methods = {
     increment() {},
@@ -36,12 +36,12 @@ CreateCounter.prototype.methods = {
 
 const counterPrototype = {
     increment() { return `Hello`},
-    decrement() {},
+    decrement() {return this.count + 1;},
     getValue() {},
     reset() {}
 }
 
-// ---------------------------TASK 3-------------------------------------------------------------------------------
+// ---------------------------STEP 3-------------------------------------------------------------------------------
 
 function createCounter(initialValue = 0){
     let count = initialValue;
@@ -52,6 +52,7 @@ function createCounter(initialValue = 0){
     }
     return counter;
 }
+
 
 const counter = createCounter(1);
 console.log(counter.count)
