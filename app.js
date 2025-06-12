@@ -53,13 +53,40 @@ function createCounter(initialValue = 0){
     return counter;
 }
 
+// const counter = createCounter(1);
+// console.log(counter.count)
 
-const counter = createCounter(1);
-console.log(counter.count)
-
-const counter3 = createCounter();
-console.log(counter3.count);
-
+// const counter3 = createCounter();
+// console.log(counter3.count);
 
 
+// ---------------------------STEP 4-------------------------------------------------------------------------------
 
+function s4createCounter(initialValue = 0){
+    let count = initialValue;
+
+    let counter = {
+        __proto__ : counterPrototype,
+        // created private methods to override prototype methods
+        increment() { return count+=2 },
+        decrement() {return count-=1},
+        getValue() {return count},
+        reset() {return count = initialValue}   
+    }
+    return counter;
+};
+// 2 counter instances created from s4createCounter
+const s4counter1 = s4createCounter(5);
+const s4counter2 = s4createCounter(12);
+
+// 1st counter instance
+console.log(s4counter1.increment());
+console.log(s4counter1.decrement());
+console.log(s4counter1.getValue());
+console.log(s4counter1.reset());
+
+// 2nd counter instance
+console.log(s4counter2.increment());
+console.log(s4counter2.decrement());
+console.log(s4counter2.getValue());
+console.log(s4counter2.reset());
