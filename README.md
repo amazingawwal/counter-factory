@@ -81,3 +81,36 @@ console.log(s4counter2.increment());
 console.log(s4counter2.decrement());
 console.log(s4counter2.getValue());
 console.log(s4counter2.reset());
+
+
+# Step 5
+## Task 5.1 
+### Higher-order functions that accept functions as parameters.
+function s5createCounter(initialValue = 0){
+    let count = initialValue;
+
+    let counter = {
+        __proto__ : counterPrototype,
+        // created private methods to override prototype methods
+        increment() { return count+=2 },
+        decrement() {return count-=1},
+        getValue() {return count},
+        reset() {return count = initialValue}, 
+        // added higher order function 
+        transform(transformFn){
+            return transformFn(count);
+        } 
+    }
+    return counter;
+};
+
+const s5counter = s5createCounter(5);
+console.log(s5counter.transform( value =>{
+    return value * 2;
+}));
+console.log(s5counter.transform( value =>{
+   return Math.max(value, 0)
+}));
+
+## Task 5.2 
+### Higher-order functions that return functions

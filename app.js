@@ -1,4 +1,5 @@
 // -------------------------STEP 1----------------------------------------------------------------
+
 // This is a counter factory (Constructor ) function that creates counter objects
 function CreateCounter (value){
     this.value = value
@@ -105,21 +106,101 @@ function s5createCounter(initialValue = 0){
         decrement() {return count-=1},
         getValue() {return count},
         reset() {return count = initialValue}, 
-        // added higher order function 
+        // added higher order function - takes function as parameter
         transform(transformFn){
             return transformFn(count);
-        } 
+        },
+        // added higher order function - returns a function
+        createPredicate(){
+            return (threshold) =>{
+                if(count >= threshold){
+                    return true;
+                }
+                return false;
+            }
+        },
+
+        // added higher order function - takes a callback function as parameter
+        onChange(callback){
+            this.increment()
+        }
     }
     return counter;
 };
 
-const s5counter1 = s5createCounter(5);
 
-console.log(s5counter1.transform( value =>{
-    return value * 2;
-}))
+const s5counter = s5createCounter(5);
 
-console.log(s5counter1.transform( value =>{
-    Math.max(value, 0)
-    return value;
-}))
+// console.log(s5counter.transform( value =>{
+//     return value * 2;
+// }));
+
+// console.log(s5counter.transform( value =>{
+//    return Math.max(value, 0)
+// }));
+
+// const isAboveThreshold = s5counter.createPredicate();
+// console.log(isAboveThreshold(10))
+
+// const add = s5counter.onChange((hhh)={});
+
+
+// ---------------------------STEP 6-------------------------------------------------------------------------------
+
+function s6createCounter(initialValue = 0){
+    let count = initialValue;
+
+    let counter = {
+        __proto__ : counterPrototype,
+        // created private methods to override prototype methods
+        increment() { return count+=2 },
+        decrement() {return count-=1},
+        getValue() {return count},
+        reset() {return count = initialValue}, 
+        // added higher order function - takes function as parameter
+        transform(transformFn){
+            return transformFn(count);
+        },
+        // added higher order function - returns a function
+        createPredicate(){
+            return (threshold) =>{
+                if(count >= threshold){
+                    return true;
+                }
+                return false;
+            }
+        },
+        // added higher order function - takes a callback function as parameter
+        onChange(callback){
+            this.increment()
+        },
+        // implemented immutability with the following functions
+        add(value) {
+            const newValue = count + value;
+            return newValue;
+        },
+        subtract(value) {
+            const newValue = count - value;
+            return newValue;
+        },
+        multiply(value) {
+            const newValue = count * value;
+            return newValue;
+        },
+        snapshot(){
+            const newValue = count ;
+            return newValue;
+        }
+    }
+    return counter;
+};
+
+
+const s6counter = s6createCounter(5);
+
+// console.log(s6counter.add(1));
+// console.log(s6counter.subtract(1));
+// console.log(s6counter.multiply(2));
+
+// console.log(s6counter.increment())
+// console.log(s6counter.snapshot())
