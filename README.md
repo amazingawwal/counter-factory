@@ -504,3 +504,72 @@ const advancedCounter = createAdvancedCounter({initialValue:2, step:5, max:3, mi
 // console.log(advancedCounter.decrement())
 // console.log(advancedCounter.getConfig())
 
+
+# Step 9
+## Testing 
+### Task 9
+#### 
+
+// Test for Step 1
+console.log(`counter1 value: ${counter1.getValue()}`);
+counter1.increment();
+console.log(`counter2 value: ${counter2.getValue()}`);
+console.log(`new counter1 value: ${counter1.getValue()}`);
+
+// Test for Step 2
+console.log(counter1.methods.increment())
+
+// Test for Step 3
+const counter = createCounter(1);
+console.log(counter.count)
+
+const counter3 = createCounter();
+console.log(counter3.count);
+
+//Test for Step 4
+// 1st counter instance
+console.log(s4counter1.increment());
+console.log(s4counter1.decrement());
+console.log(s4counter1.getValue());
+console.log(s4counter1.reset());
+
+// 2nd counter instance
+console.log(s4counter2.increment());
+console.log(s4counter2.decrement());
+console.log(s4counter2.getValue());
+console.log(s4counter2.reset());
+
+//Test for Step 5
+console.log(s5counter.transform( value =>{
+    return value * 2;
+}));
+
+console.log(s5counter.transform( value =>{
+   return Math.max(value, 0)
+}));
+
+const isAboveThreshold = s5counter.createPredicate();
+console.log(isAboveThreshold(10))
+
+const add = s5counter.onChange((hhh)={});
+
+
+// Test for Step 6
+console.log(s6counter.add(1));
+console.log(s6counter.subtract(1));
+console.log(s6counter.multiply(2));
+
+console.log(s6counter.increment())
+console.log(s6counter.snapshot())
+
+console.log(s6counter.getValue());
+
+// Test for Step 7
+console.log(s7count.batch({increment:3, decrement:2}))
+console.log(s7count.toString());
+
+
+// Test for Step 8
+console.log(advancedCounter.increment())
+console.log(advancedCounter.decrement())
+console.log(advancedCounter.getConfig())
