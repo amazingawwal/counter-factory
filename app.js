@@ -187,6 +187,7 @@ function s6createCounter(initialValue = 0){
             const newValue = count * value;
             return newValue;
         },
+        // added a snapshot method
         snapshot(){
             const newValue = count ;
             return newValue;
@@ -198,9 +199,11 @@ function s6createCounter(initialValue = 0){
 
 const s6counter = s6createCounter(5);
 
-// console.log(s6counter.add(1));
-// console.log(s6counter.subtract(1));
-// console.log(s6counter.multiply(2));
+console.log(s6counter.add(1));
+console.log(s6counter.subtract(1));
+console.log(s6counter.multiply(2));
 
 // console.log(s6counter.increment())
 // console.log(s6counter.snapshot())
+
+console.log(s6counter.getValue())

@@ -114,3 +114,181 @@ console.log(s5counter.transform( value =>{
 
 ## Task 5.2 
 ### Higher-order functions that return functions
+function s5createCounter(initialValue = 0){
+    let count = initialValue;
+
+    let counter = {
+        __proto__ : counterPrototype,
+        // created private methods to override prototype methods
+        increment() { return count+=2 },
+        decrement() {return count-=1},
+        getValue() {return count},
+        reset() {return count = initialValue}, 
+        // added higher order function - takes function as parameter
+        transform(transformFn){
+            return transformFn(count);
+        },
+        // added higher order function - returns a function
+        createPredicate(){
+            return (threshold) =>{
+                if(count >= threshold){
+                    return true;
+                }
+                return false;
+            }
+        },
+    }
+    return counter;
+};
+
+## Task 5.3 
+### Higher-order functions - onChange method
+
+function s5createCounter(initialValue = 0){
+    let count = initialValue;
+
+    let counter = {
+        __proto__ : counterPrototype,
+        // created private methods to override prototype methods
+        increment() { return count+=2 },
+        decrement() {return count-=1},
+        getValue() {return count},
+        reset() {return count = initialValue}, 
+        // added higher order function - takes function as parameter
+        transform(transformFn){
+            return transformFn(count);
+        },
+        // added higher order function - returns a function
+        createPredicate(){
+            return (threshold) =>{
+                if(count >= threshold){
+                    return true;
+                }
+                return false;
+            }
+        },
+
+        // added higher order function - takes a callback function as parameter
+        onChange(callback){
+            this.increment()
+        }
+    }
+    return counter;
+};
+
+
+
+
+# Step 6
+## Implementing Immutability
+### Task 6.1 
+#### Added immutable methods
+function s6createCounter(initialValue = 0){
+    let count = initialValue;
+
+    let counter = {
+        __proto__ : counterPrototype,
+        // created private methods to override prototype methods
+        increment() { return count+=2 },
+        decrement() {return count-=1},
+        getValue() {return count},
+        reset() {return count = initialValue}, 
+        // added higher order function - takes function as parameter
+        transform(transformFn){
+            return transformFn(count);
+        },
+        // added higher order function - returns a function
+        createPredicate(){
+            return (threshold) =>{
+                if(count >= threshold){
+                    return true;
+                }
+                return false;
+            }
+        },
+        // added higher order function - takes a callback function as parameter
+        onChange(callback){
+            this.increment()
+        },
+        // implemented immutability with the following functions
+        add(value) {
+            const newValue = count + value;
+            return newValue;
+        },
+        subtract(value) {
+            const newValue = count - value;
+            return newValue;
+        },
+        multiply(value) {
+            const newValue = count * value;
+            return newValue;
+        },
+    }
+    return counter;
+};
+
+### Task 6.2
+#### Added a snapshot() method that returns a new counter with the same current count.
+function s6createCounter(initialValue = 0){
+    let count = initialValue;
+
+    let counter = {
+        __proto__ : counterPrototype,
+        // created private methods to override prototype methods
+        increment() { return count+=2 },
+        decrement() {return count-=1},
+        getValue() {return count},
+        reset() {return count = initialValue}, 
+        // added higher order function - takes function as parameter
+        transform(transformFn){
+            return transformFn(count);
+        },
+        // added higher order function - returns a function
+        createPredicate(){
+            return (threshold) =>{
+                if(count >= threshold){
+                    return true;
+                }
+                return false;
+            }
+        },
+        // added higher order function - takes a callback function as parameter
+        onChange(callback){
+            this.increment()
+        },
+        // implemented immutability with the following functions
+        add(value) {
+            const newValue = count + value;
+            return newValue;
+        },
+        subtract(value) {
+            const newValue = count - value;
+            return newValue;
+        },
+        multiply(value) {
+            const newValue = count * value;
+            return newValue;
+        },
+        snapshot(){
+            const newValue = count ;
+            return newValue;
+        }
+    }
+    return counter;
+};
+
+### Task 6.3
+#### Testing that the original counter is unchanged after calling these methods
+
+const s6counter = s6createCounter(5);
+
+console.log(s6counter.add(1));
+console.log(s6counter.subtract(1));
+console.log(s6counter.multiply(2));
+
+console.log(s6counter.getValue())
+
+#### Question: What's the difference between counter.increment() and counter.add(1)?
+#### Answer: 
+s6counter.increment() mutates/ directly change the original value of count by adding to it while
+s6counter.add(1) creates a copy of count and adds 1 to it leaving the original count immutable
