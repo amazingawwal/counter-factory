@@ -290,5 +290,142 @@ console.log(s6counter.getValue())
 
 #### Question: What's the difference between counter.increment() and counter.add(1)?
 #### Answer: 
-s6counter.increment() mutates/ directly change the original value of count by adding to it while
-s6counter.add(1) creates a copy of count and adds 1 to it leaving the original count immutable
+s6counter.increment() mutates/ directly change the original value of count by adding to it while.
+s6counter.add(1) creates a copy of count and adds 1 to it leaving the original count immutable.
+
+
+# Step 7
+## Enhance with ES6 Features
+### Task 7.1 
+#### ES6 features in code implementation
+All code already in ES6
+
+### Task 7.2
+#### batch(operations) method that accepts an object with destructuring
+function s7createCounter(initialValue = 0){
+    let count = initialValue;
+
+    let counter = {
+        __proto__ : counterPrototype,
+        // created private methods to override prototype methods
+        increment() { return count+=2 },
+        decrement() {return count-=1},
+        getValue() {return count},
+        reset() {return count = initialValue}, 
+        // added higher order function - takes function as parameter
+        transform(transformFn){
+            return transformFn(count);
+        },
+        // added higher order function - returns a function
+        createPredicate(){
+            return (threshold) =>{
+                if(count >= threshold){
+                    return true;
+                }
+                return false;
+            }
+        },
+        // added higher order function - takes a callback function as parameter
+        onChange(callback){
+            this.increment()
+        },
+        // implemented immutability with the following functions
+        add(value) {
+            const newValue = count + value;
+            return newValue;
+        },
+        subtract(value) {
+            const newValue = count - value;
+            return newValue;
+        },
+        multiply(value) {
+            const newValue = count * value;
+            return newValue;
+        },
+        // added a snapshot method
+        snapshot(){
+            const newValue = count ;
+            return newValue;
+        },
+        //added a batch(operations) method that accepts an object with destructuring
+        batch({increment, decrement}){
+            const valueInc = count + increment;
+            const valueDec = count - decrement;
+            return(
+                `increase value: ${valueInc}, decrease value: ${valueDec}`
+            )
+        },
+        
+    }
+    return counter;
+};
+
+const s7count = s7createCounter(10);
+console.log(s7count.batch({increment:3, decrement:2}))
+
+### Task 7.3
+#### added a toString() method that uses template literals to return a formatted string.
+
+function s7createCounter(initialValue = 0){
+    let count = initialValue;
+
+    let counter = {
+        __proto__ : counterPrototype,
+        // created private methods to override prototype methods
+        increment() { return count+=2 },
+        decrement() {return count-=1},
+        getValue() {return count},
+        reset() {return count = initialValue}, 
+        // added higher order function - takes function as parameter
+        transform(transformFn){
+            return transformFn(count);
+        },
+        // added higher order function - returns a function
+        createPredicate(){
+            return (threshold) =>{
+                if(count >= threshold){
+                    return true;
+                }
+                return false;
+            }
+        },
+        // added higher order function - takes a callback function as parameter
+        onChange(callback){
+            this.increment()
+        },
+        // implemented immutability with the following functions
+        add(value) {
+            const newValue = count + value;
+            return newValue;
+        },
+        subtract(value) {
+            const newValue = count - value;
+            return newValue;
+        },
+        multiply(value) {
+            const newValue = count * value;
+            return newValue;
+        },
+        // added a snapshot method
+        snapshot(){
+            const newValue = count ;
+            return newValue;
+        },
+        //added a batch(operations) method that accepts an object with destructuring
+        batch({increment, decrement}){
+            const valueInc = count + increment;
+            const valueDec = count - decrement;
+            return(
+                `increase value: ${valueInc}, decrease value: ${valueDec}`
+            )
+        },
+        // added a toString() method that uses template literals to return a formatted string.
+        toString(){
+            return `The current count is ${count}`
+        }
+    }
+    return counter;
+};
+
+const s7count = s7createCounter(10);
+console.log(s7count.toString());
