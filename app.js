@@ -283,6 +283,7 @@ function createAdvancedCounter ({initialValue = 0, step = 1, min =  -Infinity, m
     let count = initialValue;
     
     const counter = {
+        // To ensure the counter respects the min/max boundaries.
         increment() { 
             count+=step
             if (count > max) throw new Error(`${count} is greater than the expected maximum value of ${max} `);
@@ -293,6 +294,7 @@ function createAdvancedCounter ({initialValue = 0, step = 1, min =  -Infinity, m
             if (count < min) throw new Error(`${count} is less than the expected minimum value of ${min} `);
             return count;
         },
+        // a getConfig() method that returns the current configuration.
         getConfig (){
         return {
             initialValue,

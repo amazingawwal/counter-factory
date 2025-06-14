@@ -429,3 +429,78 @@ function s7createCounter(initialValue = 0){
 
 const s7count = s7createCounter(10);
 console.log(s7count.toString());
+
+
+
+# Step 8
+## Advanced Counter Factory
+### Task 8.1 
+#### a createAdvancedCounter() function that accepts a configuration object
+
+function createAdvancedCounter ({initialValue = 0, step = 1, min =  -Infinity, max = Infinity }){
+    let count = initialValue;
+    
+};
+
+### Task 8.2 
+#### Ensuring the counter respects the min/max boundaries.
+
+function createAdvancedCounter ({initialValue = 0, step = 1, min =  -Infinity, max = Infinity }){
+    let count = initialValue;
+    // To ensure the counter respects the min/max boundaries.
+    const counter = {
+        increment() { 
+            count+=step
+            if (count > max) throw new Error(`${count} is greater than the expected maximum value of ${max} `);
+            return count;
+         },
+        decrement() {
+            count-=step
+            if (count < min) throw new Error(`${count} is less than the expected minimum value of ${min} `);
+            return count;
+        },
+        
+    }
+    
+    return counter;
+};
+
+### Task 8.3
+#### A getConfig() method that returns the current configuration.
+
+function createAdvancedCounter ({initialValue = 0, step = 1, min =  -Infinity, max = Infinity }){
+    let count = initialValue;
+    
+    const counter = {
+        // To ensure the counter respects the min/max boundaries.
+        increment() { 
+            count+=step
+            if (count > max) throw new Error(`${count} is greater than the expected maximum value of ${max} `);
+            return count;
+         },
+        decrement() {
+            count-=step
+            if (count < min) throw new Error(`${count} is less than the expected minimum value of ${min} `);
+            return count;
+        },
+        // a getConfig() method that returns the current configuration.
+        getConfig (){
+        return {
+            initialValue,
+            step,
+            max,
+            min
+        }
+
+        }
+    }
+    
+    return counter;
+};
+
+
+const advancedCounter = createAdvancedCounter({initialValue:2, step:5, max:3, min:-1})
+// console.log(advancedCounter.increment())
+// console.log(advancedCounter.decrement())
+// console.log(advancedCounter.getConfig())
+
