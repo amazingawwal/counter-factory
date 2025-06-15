@@ -317,7 +317,7 @@ const advancedCounter = createAdvancedCounter({initialValue:2, step:5, max:3, mi
 
 
 
-// ---------------------------STEP 8-------------------------------------------------------------------------------
+// ---------------------------STEP 9-------------------------------------------------------------------------------
 
 // Test for Step 1
 console.log(`counter1 value: ${counter1.getValue()}`);
