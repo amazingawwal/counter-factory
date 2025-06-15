@@ -122,10 +122,21 @@ function s5createCounter(initialValue = 0){
         },
 
         // added higher order function - takes a callback function as parameter
-        onChange(callback){
-            this.increment()
+        onChange(callbackFn){
+            // increment / decrement modification
+            count.increment = ()=>{
+                const newValue = count.increment();
+                // call callback function
+                callbackFn(newValue, 'Increment');
+            };
+            count.decrement = ()=>{
+                const newValue = count.decrement;
+                // call callback function
+                callbackFn(newValue, 'decrement')
+            };
+            return counter;
         }
-    }
+    };
     return counter;
 };
 
@@ -143,8 +154,16 @@ const s5counter = s5createCounter(5);
 // const isAboveThreshold = s5counter.createPredicate();
 // console.log(isAboveThreshold(10))
 
-// const add = s5counter.onChange((hhh)={});
+// const add = s5counter.onChange((newValue, operationType)=>{
+//     return `New Value: ${newValue}, Operation Type: ${operationType}`
+// }).increment();
 
+// const subtract = s5counter.onChange((newValue, operationType)=>{
+//     return `New Value: ${newValue}, Operation Type: ${operationType}`
+// }).decrement();
+
+// console.log(add);
+// console.log(subtract);
 
 // ---------------------------STEP 6-------------------------------------------------------------------------------
 
@@ -172,8 +191,19 @@ function s6createCounter(initialValue = 0){
             }
         },
         // added higher order function - takes a callback function as parameter
-        onChange(callback){
-            this.increment()
+        onChange(callbackFn){
+            // increment / decrement modification
+            count.increment = ()=>{
+                const newValue = count.increment();
+                // call callback function
+                callbackFn(newValue, 'Increment');
+            };
+            count.decrement = ()=>{
+                const newValue = count.decrement;
+                // call callback function
+                callbackFn(newValue, 'decrement')
+            };
+            return counter;
         },
         // implemented immutability with the following functions
         add(value) {
@@ -236,8 +266,19 @@ function s7createCounter(initialValue = 0){
             }
         },
         // added higher order function - takes a callback function as parameter
-        onChange(callback){
-            this.increment()
+        onChange(callbackFn){
+            // increment / decrement modification
+            count.increment = ()=>{
+                const newValue = count.increment();
+                // call callback function
+                callbackFn(newValue, 'Increment');
+            };
+            count.decrement = ()=>{
+                const newValue = count.decrement;
+                // call callback function
+                callbackFn(newValue, 'decrement')
+            };
+            return counter;
         },
         // implemented immutability with the following functions
         add(value) {
@@ -360,7 +401,16 @@ console.log(s5counter.transform( value =>{
 const isAboveThreshold = s5counter.createPredicate();
 console.log(isAboveThreshold(10))
 
-const add = s5counter.onChange((hhh)={});
+const add = s5counter.onChange((newValue, operationType)=>{
+    return `New Value: ${newValue}, Operation Type: ${operationType}`
+}).increment();
+
+const subtract = s5counter.onChange((newValue, operationType)=>{
+    return `New Value: ${newValue}, Operation Type: ${operationType}`
+}).decrement();
+
+console.log(add);
+console.log(subtract)
 
 
 // Test for Step 6
